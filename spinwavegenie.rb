@@ -2,8 +2,7 @@ require "formula"
 
 class Spinwavegenie < Formula
   homepage "https://github.com/SpinWaveGenie/SpinWaveGenie"
-  url "https://github.com/SpinWaveGenie/SpinWaveGenie.git", :branch => "master"
-  version "0.1.0"
+  head "https://github.com/SpinWaveGenie/SpinWaveGenie.git", :branch => "master"
 
   depends_on "cmake" => :build
   depends_on "eigen"
