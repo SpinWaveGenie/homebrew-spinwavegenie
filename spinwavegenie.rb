@@ -16,8 +16,8 @@ class Spinwavegenie < Formula
     cmake_args << "-DBUILD_TESTING=ON" if build.with? "check"
     system "cmake", ".", *cmake_args
     system "make"
-    system "make install"
     system "make", "test" if build.with? "check"
+    system "make install"
   end
 
   test do
