@@ -12,7 +12,9 @@ class Spinwavegenie < Formula
   option "without-check", "skip build-time checks (not recommended)"
 
   def install
-    system "cmake", ".", *std_cmake_args, "-DBUILD_TESTING=ON"
+    cmake_args = std_cmake_args
+    cmake_args << "-DBUILD_TESTING=ON" if build.with? "check"
+    system "cmake", ".", *cmake_args
     system "make"
     system "make install"
     system "make", "test" if build.with? "check"
