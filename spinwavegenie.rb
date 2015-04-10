@@ -8,7 +8,7 @@ class Spinwavegenie < Formula
   depends_on "eigen"
   depends_on "boost" => "c++11"
   depends_on "tbb" => "c++11"
-  depends_on "nlopt" => :optional
+  depends_on "homebrew/science/nlopt" => :optional
   option "without-check", "skip build-time checks (not recommended)"
 
   def install
