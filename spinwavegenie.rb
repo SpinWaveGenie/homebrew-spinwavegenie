@@ -2,8 +2,8 @@ require "formula"
 
 class Spinwavegenie < Formula
   homepage "https://github.com/SpinWaveGenie/SpinWaveGenie"
-  url "http://github.com/SpinWaveGenie/SpinWaveGenie/releases/download/v0.1.1/SpinWaveGenie-0.1.1.tar.gz"
-  sha256 "731670a3a4107b3de064b54c3fd1c72f61b65385d783513b0cb7445f0b3c8ed9"
+  url "http://github.com/SpinWaveGenie/SpinWaveGenie/releases/download/v0.2.1/SpinWaveGenie-0.2.1.tar.gz"
+  sha256 ""
   head "https://github.com/SpinWaveGenie/SpinWaveGenie.git", :branch => "master"
 
   depends_on "cmake" => :build
