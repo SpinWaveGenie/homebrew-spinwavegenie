@@ -3,7 +3,7 @@ require "formula"
 class Spinwavegenie < Formula
   homepage "https://github.com/SpinWaveGenie/SpinWaveGenie"
   url "http://github.com/SpinWaveGenie/SpinWaveGenie/releases/download/v0.2.1/SpinWaveGenie-0.2.1.tar.gz"
-  sha256 ""
+  sha256 "ee125a20c84112f3dc92b904d7a51c4f5b65b0a72191d574f037cfa9c7dbabc8"
   head "https://github.com/SpinWaveGenie/SpinWaveGenie.git", :branch => "master"
 
   depends_on "cmake" => :build
