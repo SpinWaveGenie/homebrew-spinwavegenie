@@ -1,5 +1,3 @@
-require "formula"
-
 class Spinwavegenie < Formula
   homepage "https://github.com/SpinWaveGenie/SpinWaveGenie"
   url "http://github.com/SpinWaveGenie/SpinWaveGenie/releases/download/v0.2.1/SpinWaveGenie-0.2.1.tar.gz"
@@ -16,6 +14,7 @@ class Spinwavegenie < Formula
   def install
     cmake_args = std_cmake_args
     cmake_args << "-DBUILD_TESTING=ON" if build.with? "check"
+    cmake_args << "-DPYTHON_SITE_PACKAGES_DIR=lib/python2.7/site-packages" if build.head?
     system "cmake", ".", *cmake_args
     system "make"
     system "make", "test" if build.with? "check"
