@@ -16,7 +16,7 @@ class Spinwavegenie < Formula
 
   def install
     cmake_args = std_cmake_args
-    cmake_args << "-DBUILD_TESTING=ON" if build.with? "check"
+    cmake_args << "-DBUILD_TESTING=ON" if build.with? "test"
     cmake_args << "-DPYTHON_SITE_PACKAGES_DIR=lib/python2.7/site-packages" if build.head?
     system "cmake", ".", *cmake_args
     system "make"
