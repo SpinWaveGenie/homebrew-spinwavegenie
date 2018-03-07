@@ -5,14 +5,13 @@ class Spinwavegenie < Formula
   sha256 "ee125a20c84112f3dc92b904d7a51c4f5b65b0a72191d574f037cfa9c7dbabc8"
   head "https://github.com/SpinWaveGenie/SpinWaveGenie.git", :branch => "master"
 
-  option "without-test", "skip build-time testss (not recommended)"
+  option "without-test", "skip build-time tests (not recommended)"
 
   depends_on "cmake" => :build
   depends_on "eigen"
   depends_on "boost"
   depends_on "tbb"
-  depends_on :python if build.head?
-  depends_on "homebrew/science/nlopt" => :optional
+  depends_on "python@2" if build.head?
 
   def install
     cmake_args = std_cmake_args
