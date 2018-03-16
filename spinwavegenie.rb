@@ -1,8 +1,8 @@
 class Spinwavegenie < Formula
   desc "Library for simplifying linear spin wave calculations"
   homepage "https://github.com/SpinWaveGenie/SpinWaveGenie"
-  url "https://github.com/SpinWaveGenie/SpinWaveGenie/releases/download/v0.2.1/SpinWaveGenie-0.2.1.tar.gz"
-  sha256 "ee125a20c84112f3dc92b904d7a51c4f5b65b0a72191d574f037cfa9c7dbabc8"
+  url "https://github.com/SpinWaveGenie/SpinWaveGenie/releases/download/v0.3.0/SpinWaveGenie-0.3.0.tar.gz"
+  sha256 "689ed2e5a2942b1ace500b0f78e5a72697f9010ac47ad9f0e5853d7da9e836c5"
   head "https://github.com/SpinWaveGenie/SpinWaveGenie.git", :branch => "master"
 
   option "without-test", "skip build-time tests (not recommended)"
@@ -11,22 +11,20 @@ class Spinwavegenie < Formula
   depends_on "eigen"
   depends_on "boost"
   depends_on "tbb"
-  depends_on "python@2" if build.head?
+  depends_on "python@2"
 
   def install
     cmake_args = std_cmake_args
     cmake_args << "-DBUILD_TESTING=ON" if build.with? "test"
-    cmake_args << "-DPYBIND11_PYTHON_VERSION=2.7" if build.head?
-    cmake_args << "-DPYTHON_SITE_PACKAGES_DIR=lib/python2.7/site-packages" if build.head?
+    cmake_args << "-DPYBIND11_PYTHON_VERSION=2.7"
+    cmake_args << "-DPYTHON_SITE_PACKAGES_DIR=lib/python2.7/site-packages"
     system "cmake", ".", *cmake_args
     system "make"
     system "make", "test" if build.with? "test"
     system "make", "install"
-    if build.head?
-      site_packages = "lib/python2.7/site-packages"
-      pth_contents = "#{prefix}/lib/python2.7/site-packages\n"
-      (prefix/site_packages/"homebrew-spinwavegenie.pth").write pth_contents
-    end
+    site_packages = "lib/python2.7/site-packages"
+    pth_contents = "#{prefix}/lib/python2.7/site-packages\n"
+    (prefix/site_packages/"homebrew-spinwavegenie.pth").write pth_contents
   end
 
   test do
