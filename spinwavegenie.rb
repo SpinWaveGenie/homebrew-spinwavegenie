@@ -11,20 +11,26 @@ class Spinwavegenie < Formula
   depends_on "eigen"
   depends_on "boost"
   depends_on "tbb"
-  depends_on "python@2"
+  depends_on "python@2" => :recommended
+  depends_on "python" => :recommended
 
   def install
-    cmake_args = std_cmake_args
-    cmake_args << "-DBUILD_TESTING=ON" if build.with? "test"
-    cmake_args << "-DPYBIND11_PYTHON_VERSION=2.7"
-    cmake_args << "-DPYTHON_SITE_PACKAGES_DIR=lib/python2.7/site-packages"
-    system "cmake", ".", *cmake_args
-    system "make"
-    system "make", "test" if build.with? "test"
-    system "make", "install"
-    site_packages = "lib/python2.7/site-packages"
-    pth_contents = "#{prefix}/lib/python2.7/site-packages\n"
-    (prefix/site_packages/"homebrew-spinwavegenie.pth").write pth_contents
+    Language::Python.each_python(build) do |_python, version|
+      cmake_args = std_cmake_args
+      cmake_args << "-DUSE_SYSTEM_EIGEN=ON"
+      cmake_args << "-DBUILD_TESTING=ON" if build.with? "test"
+      cmake_args << "-DPYBIND11_PYTHON_VERSION=#{version}"
+      cmake_args << "-DPYTHON_SITE_PACKAGES_DIR=lib/python#{version}/site-packages"
+      Dir.mkdir("#{buildpath}/python#{version}")
+      Dir.chdir("#{buildpath}/python#{version}")
+      system "cmake", *cmake_args, "../"
+      system "make"
+      system "make", "test" if build.with? "test"
+      system "make", "install"
+      site_packages = "lib/python#{version}/site-packages"
+      pth_contents = "#{prefix}/lib/python#{version}/site-packages\n"
+      (prefix/site_packages/"homebrew-spinwavegenie.pth").write pth_contents
+    end
   end
 
   test do
